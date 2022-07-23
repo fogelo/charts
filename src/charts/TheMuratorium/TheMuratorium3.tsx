@@ -18,7 +18,7 @@ const TheMuratorium1 = () => {
             .range([150, 0])
 
         // @ts-ignore
-        const xAxis = d3.axisBottom(xScale).ticks(data.length).tickFormat(index => index + 1)
+        const xAxis = d3.axisBottom(xScale).ticks(data.length/2).tickFormat(index => index + 1)
         // @ts-ignore
         svg.select(".xAxis").style("transform", "translateY(150px)").call(xAxis)  // можно так xAxis(svg.select(".xAxis")
         const yAxis = d3.axisRight(yScale)
@@ -45,6 +45,16 @@ const TheMuratorium1 = () => {
             .attr("fill", "none")
             .attr("stroke", "blue")
     }, [data])
+
+
+    useEffect(() => {
+        setInterval(() => {
+            console.log("interval")
+            // @ts-ignore
+            data.push(Math.random() * 70)
+            setData([...data])
+        }, 2000)
+    }, [])
 
     return (
         <div>

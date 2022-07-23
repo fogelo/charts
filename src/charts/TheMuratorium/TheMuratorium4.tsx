@@ -9,42 +9,41 @@ const TheMuratorium1 = () => {
 
     useEffect(() => {
         const svg = d3.select(svgRef.current)
-        const xScale = d3.scaleLinear()
-            .domain([0, data.length - 1])
+
+        const xScale = d3.scaleBand()
+            // @ts-ignore
+            .domain(data.map((value, index) => index))
             .range([0, 300])
+            .padding(0.5)
 
         const yScale = d3.scaleLinear()
-            .domain([0, 75])
+            .domain([0, 150])
             .range([150, 0])
 
         // @ts-ignore
-        const xAxis = d3.axisBottom(xScale).ticks(data.length).tickFormat(index => index + 1)
+        const xAxis = d3.axisBottom(xScale).ticks(data.length)
         // @ts-ignore
-        svg.select(".xAxis").style("transform", "translateY(150px)").call(xAxis)  // можно так xAxis(svg.select(".xAxis")
+        svg.select(".xAxis").style("transform", "translateY(150px)").call(xAxis)
         const yAxis = d3.axisRight(yScale)
         // @ts-ignore
-        svg.select(".yAxis").style("transform", "translateX(300px)").call(yAxis)  // можно так xAxis(svg.select(".xAxis")
+        svg.select(".yAxis").style("transform", "translateX(300px)").call(yAxis)
 
-        // generate the "d" attribute of a path element
-        // @ts-ignore
-        const myLine = d3.line()
-            //x и y это методы переборы массива наподобие map, который мы будем потом передавать в myLine
-            .x((value, index) => xScale(index))
-            // @ts-ignore
-            //вызовет и передаст значения внутри
-            .y(yScale)
 
-        //renders path element, and attaches
-        svg
-            .selectAll(".line")
-            .data([data])
-            .join("path")
-            .attr("class", "line")
+        svg.selectAll(".bar").data(data).join("rect").attr("class", "bar")
             // @ts-ignore
-            .attr("d", myLine)
-            .attr("fill", "none")
-            .attr("stroke", "blue")
+            .attr("x", (value, index) => xScale(index))
+            .attr("y", yScale)
+            .attr("width", xScale.bandwidth)
+            .attr("height", value => 150 - yScale(value))
     }, [data])
+
+    // useEffect(() => {
+    //     setInterval(() => {
+    //         console.log("interval")
+    //         setData(data.map(value => value * Math.random() * 1))
+    //     }, 2000)
+    // }, [])
+
 
     return (
         <div>
