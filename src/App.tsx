@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import UiCodeTv from "./UiCodeTv";
+import UiCodeTv from "./charts/UiCodeTv/UiCodeTv";
 
 function App() {
     return (
