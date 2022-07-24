@@ -20,6 +20,13 @@ const TheMuratorium1 = () => {
             .domain([0, 150])
             .range([150, 0])
 
+        const colorScale = d3.scaleLinear()
+            .domain([75, 150])
+            // @ts-ignore
+            .range(["green", "red"])
+            .clamp(true)
+
+
         // @ts-ignore
         const xAxis = d3.axisBottom(xScale).ticks(data.length)
         // @ts-ignore
@@ -30,19 +37,22 @@ const TheMuratorium1 = () => {
 
 
         svg.selectAll(".bar").data(data).join("rect").attr("class", "bar")
+            .attr("fill", colorScale)
+            .style("transform", "scale(1,-1") // переворвчивает столбики, чтобы анимация была правильная
             // @ts-ignore
             .attr("x", (value, index) => xScale(index))
-            .attr("y", yScale)
+            .attr("y", -150)
             .attr("width", xScale.bandwidth)
+            .transition()
             .attr("height", value => 150 - yScale(value))
     }, [data])
 
-    // useEffect(() => {
-    //     setInterval(() => {
-    //         console.log("interval")
-    //         setData(data.map(value => value * Math.random() * 1))
-    //     }, 2000)
-    // }, [])
+    useEffect(() => {
+        setInterval(() => {
+            console.log("interval")
+            setData(data.map(value => value * Math.random() * 1))
+        }, 2000)
+    }, [])
 
 
     return (

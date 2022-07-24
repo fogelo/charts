@@ -11,7 +11,7 @@ const TheMuratorium = () => {
             {/*<TheMuratorium1/>*/}
             {/*<TheMuratorium2/>*/}
             {/*<TheMuratorium3/>*/}
-            {/*<TheMuratorium4/>*/}
+            <TheMuratorium4/>
         </div>
     );
 };
