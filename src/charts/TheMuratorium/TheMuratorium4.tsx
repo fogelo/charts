@@ -3,7 +3,7 @@ import * as d3 from "d3";
 
 
 // @ts-ignore
-const TheMuratorium1 = () => {
+const TheMuratorium4 = () => {
     const svgRef = useRef(null)
     const [data, setData] = useState<number[]>([25, 30, 45, 60, 20, 65, 75])
 
@@ -47,12 +47,12 @@ const TheMuratorium1 = () => {
             .attr("height", value => 150 - yScale(value))
     }, [data])
 
-    useEffect(() => {
-        setInterval(() => {
-            console.log("interval")
-            setData(data.map(value => value * Math.random() * 1))
-        }, 2000)
-    }, [])
+    // useEffect(() => {
+    //     setInterval(() => {
+    //         console.log("interval")
+    //         setData(data.map(value => value * Math.random() * 1))
+    //     }, 2000)
+    // }, [])
 
 
     return (
@@ -70,4 +70,4 @@ const TheMuratorium1 = () => {
     );
 };
 
-export default TheMuratorium1;
+export default TheMuratorium4;

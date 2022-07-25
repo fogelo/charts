@@ -1,7 +1,17 @@
 .App {
+
 }
 
+/*svg rect {*/
+/*    fill: grey;*/
+/*}*/
+
+/*svg text {*/
+/*    fill: yellow;*/
+/*    font: 12px sans-serif;*/
+/*    text-anchor: end;*/
+/*}*/
+
 svg {
-    /*background-color: gray;*/
     overflow: visible;
 }

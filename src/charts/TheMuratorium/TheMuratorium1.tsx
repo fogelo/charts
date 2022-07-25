@@ -8,8 +8,6 @@ const TheMuratorium1 = () => {
 
     useEffect(() => {
         const svg = d3.select(svgRef.current)
-
-
         svg
             .selectAll("circle").data(data)//выбери все теги circle и синхронизируй их c data
             .join("circle") // создаст столько circle сколько элементов в массиве data
