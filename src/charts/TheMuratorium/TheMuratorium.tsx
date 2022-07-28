@@ -11,8 +11,8 @@ const TheMuratorium = () => {
         <div>
             {/*<TheMuratorium1/>*/}
             {/*<TheMuratorium2/>*/}
-            <TheMuratorium3/>
-            {/*<TheMuratorium4/>*/}
+            {/*<TheMuratorium3/>*/}
+            <TheMuratorium4/>
             {/*<TheMuratorium5/>*/}
         </div>
     );
