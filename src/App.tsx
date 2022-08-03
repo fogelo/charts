@@ -1,9 +1,12 @@
 import React from "react";
 import "./App.css";
-import TheNetNinja from "./charts/TheNetNinja";
-import CoderLessons from "./CoderLessons/CoderLessons";
 import TheMuratorium from "./charts/TheMuratorium/TheMuratorium";
-import MyLine from "./MyLine";
+import TheNetNinja from "./charts/TheNetNinja";
+import MichaelCouch from "./charts/MichaelCouch/MichaelCouch";
+import CoderLessons from "./charts/CoderLessons/CoderLessons";
+import LineChart from "./my_charts/LineChart";
+import Gchart from "./my_charts/Gchart";
+import FreeCodeCamp from "./charts/FreeCodeCamp/FreeCodeCamp";
 
 function App() {
     return (
@@ -13,7 +16,9 @@ function App() {
             {/*<TheNetNinja/>*/}
             {/*<MichaelCouch/>*/}
             {/*<CoderLessons/>*/}
-            <MyLine/>
+            {/*<LineChart/>*/}
+            {/*<Gchart/>*/}
+            <FreeCodeCamp/>
         </div>
     );
 }

@@ -1,10 +1,9 @@
-.App {
-
+*{
+    box-sizing: border-box;
 }
-
-/*svg rect {*/
-/*    fill: grey;*/
-/*}*/
+.App {
+/*padding: 10px 0 0 30px;*/
+}
 
 /*svg text {*/
 /*    fill: yellow;*/
@@ -13,5 +12,16 @@
 /*}*/
 
 svg {
+    display: block;
+    width: 100%;
+    height: 300px;
+    background: #f7f7f7;
     overflow: visible;
 }
+svg rect.selection {
+    stroke: none;
+}
+.wrapper16 {
+    padding: 0 50px;
+}
+

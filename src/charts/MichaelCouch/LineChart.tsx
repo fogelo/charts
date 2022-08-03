@@ -59,14 +59,14 @@ const LineChart: FC<IProps> = ({width, height}) => {
 
     // console.log(d3.select("body").select("#container"))
 
-    //create scale for the x axis
+    //create scale for the xaxis
     const xScale = d3
         .scaleLinear()
         // @ts-ignore
         .domain([xMinValue, xMaxValue])
         .range([0, width])
 
-    //create scale for the y axis
+    //create scale for the yaxis
     const yScale = d3
         .scaleLinear()
         // @ts-ignore

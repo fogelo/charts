@@ -1,23 +1,35 @@
 import React, {useEffect, useRef, useState} from "react";
 import * as d3 from "d3";
-import {log} from "util";
-
+import data2 from "./store"
 
 // @ts-ignore
-const TheMuratorium1 = () => {
+const LineChart = () => {
     const svgRef = useRef(null)
-    const [data, setData] = useState<number[]>([25, 30, 45, 60, 20, 65, 75])
+    const dataNew = data2.map((e: any) => ({x: new Date(e.x).getTime(), y: e.y}))
+    const [data, setData] = useState<any>(dataNew)
+
+    // @ts-ignore
+    const yMinValue = d3.min(data, d => d.y)
+    // @ts-ignore
+    const yMaxValue = d3.max(data, d => d.y)
+    // @ts-ignore
+    const xMinValue = d3.min(data, d => d.x)
+    // @ts-ignore
+    const xMaxValue = d3.max(data, d => d.x)
+
 
     useEffect(() => {
 
         const svg = d3.select(svgRef.current)
-
+        console.log()
         const xScale = d3.scaleLinear() // говорит что масштаб у нас линейный, то есть достаточно указать только 2 значения от и до и расстояние разобется условно на равные части
-            .domain([0, data.length - 1]) //задаем максимальное и минимальное значение которое у нас будет на оси x
-            .range([0, 300]) // задаем от скольки до скольки пикселей растянем наш domain (можно сделать 6см и можно 6м)
+            // @ts-ignore
+            .domain([xMinValue, xMaxValue]) //задаем максимальное и минимальное значение которое у нас будет на оси x
+            .range([0, 1000]) // задаем от скольки до скольки пикселей растянем наш domain (можно сделать 6см и можно 6м)
 
         const yScale = d3.scaleLinear()
-            .domain([0, 75])
+            // @ts-ignore
+            .domain([0, yMaxValue])
             .range([150, 0])
         // В итоге xScale и yScale - это просто функции, в которые можно передать значение x или y соответственно и на выходе получить длину на которой это значение
         // расположено по факту
@@ -25,9 +37,9 @@ const TheMuratorium1 = () => {
         // @ts-ignore
         const xAxis = d3.axisBottom(xScale) //xAxis это функция которая принимает элемент (g) и внутри него рендерит остальные элементы
             // а это path для самой оси, несколько засечек line и text для каждой из засечек
-            .ticks(data.length / 2) //указываем просто колличество засечек
+            .ticks(5) //указываем просто колличество засечек
             // @ts-ignore
-            .tickFormat(index => index + 1) //здесь мы указываем то что будет отображаться по засечками, можно указать хоть apple
+            .tickFormat(index => new Date(index).toLocaleDateString()) //здесь мы указываем то что будет отображаться по засечками, можно указать хоть apple
 
 
         // @ts-ignore
@@ -37,20 +49,22 @@ const TheMuratorium1 = () => {
             .call(xAxis)  // можно так xAxis(svg.select(".xAxis")) // вызываю функцию xAxis и передаю ей элемент (g), внутри которого хочу отрисовать элементы
         //для моей оси
 
-        const yAxis = d3.axisRight(yScale)
+        const yAxis = d3.axisLeft(yScale).ticks(5) //указываем просто колличество засечек
         // @ts-ignore
         svg.select(".yAxis")
-            .style("transform", "translateX(300px)")
+            // .style("transform", "translateX(300px)")
             // @ts-ignore
             .call(yAxis)  // можно так xAxis(svg.select(".xAxis")
 
         // создаем атрибут "d" в теге path
+
         // @ts-ignore
         const myLine = d3.line()
             //x и y это методы переборы массива наподобие map, который мы будем потом передавать в myLine
-            .x((value, index) => xScale(index)) // x - это у нас просто координата для браузера
             // @ts-ignore
-            .y(yScale)  //вызовет и передаст значения внутри, тоже самое value=>yScale(value)
+            .x((value, index) => xScale(value.x)) // x - это у нас просто координата для браузера
+            // @ts-ignore
+            .y(value => yScale(value.y))  //вызовет и передаст значения внутри, тоже самое value=>yScale(value)
 
         //renders path element, and attaches
         svg
@@ -65,18 +79,18 @@ const TheMuratorium1 = () => {
     }, [data])
 
 
-    // useEffect(() => {
-    //     setInterval(() => {
-    //         console.log("interval")
-    //         // @ts-ignore
-    //         data.push(Math.random() * 70)
-    //         setData([...data])
-    //     }, 2000)
-    // }, [])
+    useEffect(() => {
+        setInterval(() => {
+            console.log("interval")
+            // @ts-ignore
+            data.push({x: data[data.length - 1].x + 1300000, y: Math.random() * (55 - 35) + 35})
+            setData([...data])
+        }, 2000)
+    }, [])
 
     return (
         <div>
-            <svg ref={svgRef} id={"chart"} viewBox={"0 0 500 150"}>
+            <svg ref={svgRef} id={"chart"} width={"100%"}>
 
                 <g className={"xAxis"}/>
                 <g className={"yAxis"}/>
@@ -89,4 +103,4 @@ const TheMuratorium1 = () => {
     );
 };
 
-export default TheMuratorium1;
+export default LineChart;
