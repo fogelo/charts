@@ -1,5 +1,6 @@
 import React, {MouseEvent, useState} from 'react';
 import * as d3 from "d3"
+
 const MouseMove = () => {
     const width = 960
     const height = 500
@@ -14,15 +15,22 @@ const MouseMove = () => {
     }
 
 
+    const url = "https://gist.githubusercontent.com/fogelo/f0f1f772c4e00080ba795f487106d555/raw/d8c6ca3b70bf94cd911ea0fa03670b3e970fe7f9/data"
+
     // вот так можно распарсить cvs файл с помощью d3 в json (а в gist можно хранить какие нибудь данные)
-    fetch("https://gist.githubusercontent.com/fogelo/f0f1f772c4e00080ba795f487106d555/raw/d8c6ca3b70bf94cd911ea0fa03670b3e970fe7f9/data")
-        .then(text=>{
+    fetch(url)
+        .then(text => {
             return text.text()
-        }).then(text=>{
+        }).then(text => {
         const data = d3.csvParse(text)
         console.log(data)
     })
 
+    //Но можно сделать проще, воспользоваться уже готовым функционалом d3, происходит тоже самое но за кадром
+    d3.csv(url).then(data => {
+        console.log(data) // получим данные в виде объекта
+        console.log(d3.csvFormat(data)) // получим в виде строки
+    })
 
     return (
         <svg className={"free-code-camp-svg"}
