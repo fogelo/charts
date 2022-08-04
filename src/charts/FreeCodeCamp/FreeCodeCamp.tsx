@@ -1,7 +1,6 @@
 import React from 'react';
 import "./FreeCodeCamp.scss"
 import * as d3 from "d3"
-import {PieArcDatum} from "d3";
 
 
 const FreeCodeCamp = () => {
@@ -23,6 +22,8 @@ const FreeCodeCamp = () => {
         .startAngle(Math.PI / 2)
         .endAngle(3 / 2 * Math.PI);
 
+
+    console.log(d3.range(5))
 
     return (
         <svg className={"free-code-camp-svg"} width={width} height={height}>
