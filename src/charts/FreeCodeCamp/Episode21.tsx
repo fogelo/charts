@@ -1,17 +1,15 @@
 import React, {useEffect, useState} from "react";
 import * as d3 from "d3";
 
-const Episode21 = () => {
+const csvUrl = "https://gist.githubusercontent.com/fogelo/6c7f8a44911a1640b52579d6998f82d9/raw/a6cc67d27005e324e2c7956aca6764b444dd692a/population"
 
-    const width = 960
-    const height = 400
-    const margin = {top: 20, right: 20, bottom: 20, left: 200}
-    const innerHeight = height - margin.top - margin.bottom
-    const innerWidth = width - margin.right - margin.left
+//функции доступа, удобны тем что не нужно менять значение в нескольких местах. Все повторяющиеся куски кода нужно засовывать в функции
+// это пожалуй основной принцип для написания хорошего код
+const xValue = (d: any) => d.Population
+const yValue = (d: any) => d.Country
 
 
-    const csvUrl = "https://gist.githubusercontent.com/fogelo/6c7f8a44911a1640b52579d6998f82d9/raw/a6cc67d27005e324e2c7956aca6764b444dd692a/population"
-
+const useData = () => {
     const [data, setData] = useState<any>(null)
 
     useEffect(() => {
@@ -25,6 +23,48 @@ const Episode21 = () => {
         })
 
     }, [])
+
+    return data
+}
+
+
+const AxisBottom = ({xScale, innerHeight}: any) =>
+    //@ts-ignore
+    xScale.ticks().map(tickValue => (
+        <g key={tickValue} transform={`translate(${xScale(tickValue)},0)`}>
+            <line y2={innerHeight} stroke={"black"}/>
+            <text y={innerHeight + 3} dy={".71em"} textAnchor={"middle"}>{tickValue}</text>
+        </g>
+    ))
+
+
+const AxisLeft = ({yScale}: any) =>
+    //@ts-ignore
+    yScale.domain().map(value => (
+        // @ts-ignore
+        <g key={value} transform={`translate(0, ${yScale(value) + yScale.bandwidth() / 2})`}>
+            <text textAnchor={"end"} dy={".32em"} x={-3}>{value}</text>
+        </g>
+    ))
+
+
+const Bars = ({data, xScale, yScale}: any) =>
+    data.map((d: any) => {
+        return (
+            <rect key={d.Country} x={0} y={yScale(d.Country)} width={xScale(d.Population)}
+                  height={yScale.bandwidth()}/>
+        )
+    })
+
+const Episode21 = () => {
+
+    const width = 960
+    const height = 400
+    const margin = {top: 20, right: 20, bottom: 20, left: 200}
+    const innerHeight = height - margin.top - margin.bottom
+    const innerWidth = width - margin.right - margin.left
+
+    const data = useData()
 
     if (!data) {
         return <div>Loading</div>
@@ -43,33 +83,9 @@ const Episode21 = () => {
     return (
         <svg width={width} height={height}>
             <g transform={`translate(${margin.left}, ${margin.top})`}>
-                {
-                    xScale.ticks().map(tickValue => (
-                        <g key={tickValue} transform={`translate(${xScale(tickValue)},0)`}>
-                            <line y2={innerHeight} stroke={"black"}/>
-                            <text y={innerHeight + 3} dy={".71em"} textAnchor={"middle"}>{tickValue}</text>
-                        </g>
-                    ))
-                }
-
-                {/*тики по оси y*/}
-                {
-                    yScale.domain().map(value => (
-                        // @ts-ignore
-                        <g key={value} transform={`translate(0, ${yScale(value) + yScale.bandwidth() / 2})`}>
-                            <text textAnchor={"end"} dy={".32em"} x={-3}>{value}</text>
-                        </g>
-                    ))
-                }
-                {/*бары*/}
-                {
-                    data.map((d: any) => {
-                        return (
-                            <rect key={d.Country} x={0} y={yScale(d.Country)} width={xScale(d.Population)}
-                                  height={yScale.bandwidth()}/>
-                        )
-                    })
-                }
+                <AxisBottom xScale={xScale} innerHeight={innerHeight}/>
+                <AxisLeft yScale={yScale}/>
+                <Bars data={data} xScale={xScale} yScale={yScale}/>
             </g>
         </svg>
     );
