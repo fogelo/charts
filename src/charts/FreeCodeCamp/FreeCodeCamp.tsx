@@ -5,6 +5,7 @@ import MouseMove from "./MouseMove";
 import Episode20 from "./Episode20";
 import Episode21 from "./Episode21";
 import Episode25 from "./Episode25";
+import Episode26 from "./Episode26";
 
 const FreeCodeCamp = () => {
     return (
@@ -13,7 +14,8 @@ const FreeCodeCamp = () => {
             {/*<MouseMove/>*/}
             {/*<Episode20/>*/}
             {/*<Episode21/>*/}
-            <Episode25/>
+            {/*<Episode25/>*/}
+            <Episode26/>
         </div>
     );
 };
