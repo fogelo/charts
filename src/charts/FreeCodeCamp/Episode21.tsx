@@ -5,7 +5,7 @@ const Episode21 = () => {
 
     const width = 960
     const height = 400
-    const margin = {top: 20, right: 20, bottom: 20, left: 20}
+    const margin = {top: 20, right: 20, bottom: 20, left: 200}
     const innerHeight = height - margin.top - margin.bottom
     const innerWidth = width - margin.right - margin.left
 
@@ -36,16 +36,36 @@ const Episode21 = () => {
     const xScale = d3.scaleLinear().domain([0, d3.max(data, d => d.Population)]).range([0, innerWidth])
     console.log(data)
     console.log(countries)
-
-
+    console.log(xScale.ticks())
+    console.log(yScale.domain())
     // @ts-ignore
+
     return (
         <svg width={width} height={height}>
             <g transform={`translate(${margin.left}, ${margin.top})`}>
                 {
-                    data.map((d: any, i: any) => {
+                    xScale.ticks().map(tickValue => (
+                        <g key={tickValue} transform={`translate(${xScale(tickValue)},0)`}>
+                            <line y2={innerHeight} stroke={"black"}/>
+                            <text y={innerHeight + 3} dy={".71em"} textAnchor={"middle"}>{tickValue}</text>
+                        </g>
+                    ))
+                }
+
+                {/*тики по оси y*/}
+                {
+                    yScale.domain().map(value => (
+                        // @ts-ignore
+                        <g key={value} transform={`translate(0, ${yScale(value) + yScale.bandwidth() / 2})`}>
+                            <text textAnchor={"end"} dy={".32em"} x={-3}>{value}</text>
+                        </g>
+                    ))
+                }
+                {/*бары*/}
+                {
+                    data.map((d: any) => {
                         return (
-                            <rect key={i} x={0} y={yScale(d.Country)} width={xScale(d.Population)}
+                            <rect key={d.Country} x={0} y={yScale(d.Country)} width={xScale(d.Population)}
                                   height={yScale.bandwidth()}/>
                         )
                     })
