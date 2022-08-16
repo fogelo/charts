@@ -14,7 +14,7 @@ const useData = () => {
 
     useEffect(() => {
         const row = (d: any) => {
-            d.Population = +d["2020"]
+            d.Population = +d["2020"] * 1000
             return d
         }
         // @ts-ignore
@@ -26,14 +26,19 @@ const useData = () => {
 
     return data
 }
+const siFormat = d3.format(".2s")
+const xAxisTickFormat = (tickValue: any) => siFormat(tickValue).replace("G", "B")
 
-
-const AxisBottom = ({xScale, innerHeight}: any) =>
+const AxisBottom = ({xScale, innerHeight, tickFormat}: any) =>
     //@ts-ignore
     xScale.ticks().map(tickValue => (
-        <g key={tickValue} transform={`translate(${xScale(tickValue)},0)`}>
+        <g className={"tick"} key={tickValue} transform={`translate(${xScale(tickValue)},0)`}>
             <line y2={innerHeight} stroke={"black"}/>
-            <text y={innerHeight + 3} dy={".71em"} textAnchor={"middle"}>{tickValue}</text>
+            <text y={innerHeight + 3} dy={".71em"} textAnchor={"middle"}>
+                {
+                    tickFormat(tickValue)
+                }
+            </text>
         </g>
     ))
 
@@ -42,7 +47,7 @@ const AxisLeft = ({yScale}: any) =>
     //@ts-ignore
     yScale.domain().map(value => (
         // @ts-ignore
-        <g key={value} transform={`translate(0, ${yScale(value) + yScale.bandwidth() / 2})`}>
+        <g className={"tick"} key={value} transform={`translate(0, ${yScale(value) + yScale.bandwidth() / 2})`}>
             <text textAnchor={"end"} dy={".32em"} x={-3}>{value}</text>
         </g>
     ))
@@ -51,8 +56,11 @@ const AxisLeft = ({yScale}: any) =>
 const Bars = ({data, xScale, yScale}: any) =>
     data.map((d: any) => {
         return (
-            <rect key={d.Country} x={0} y={yScale(d.Country)} width={xScale(d.Population)}
-                  height={yScale.bandwidth()}/>
+            <rect className={"bar"} key={d.Country} x={0} y={yScale(d.Country)} width={xScale(d.Population)}
+                  height={yScale.bandwidth()}
+            >
+                <title>{xAxisTickFormat(d.Population)}</title>
+            </rect>
         )
     })
 
@@ -60,7 +68,7 @@ const Episode21 = () => {
 
     const width = 960
     const height = 400
-    const margin = {top: 20, right: 20, bottom: 20, left: 200}
+    const margin = {top: 20, right: 30, bottom: 60, left: 220}
     const innerHeight = height - margin.top - margin.bottom
     const innerWidth = width - margin.right - margin.left
 
@@ -71,21 +79,24 @@ const Episode21 = () => {
     }
 
     const countries = data.map((d: any) => d.Country).slice(0, 10)
-    const yScale = d3.scaleBand().domain(countries).range([0, innerHeight])
+    const yScale = d3.scaleBand().domain(countries).range([0, innerHeight]).paddingInner(0.2)
     // @ts-ignore
     const xScale = d3.scaleLinear().domain([0, d3.max(data, d => d.Population)]).range([0, innerWidth])
     console.log(data)
     console.log(countries)
-    console.log(xScale.ticks())
+    // console.log(xScale.ticks())
     console.log(yScale.domain())
     // @ts-ignore
 
     return (
         <svg width={width} height={height}>
             <g transform={`translate(${margin.left}, ${margin.top})`}>
-                <AxisBottom xScale={xScale} innerHeight={innerHeight}/>
+                <AxisBottom xScale={xScale} innerHeight={innerHeight} tickFormat={xAxisTickFormat}/>
                 <AxisLeft yScale={yScale}/>
-                <Bars data={data} xScale={xScale} yScale={yScale}/>
+                <text className={"axis-label"} x={innerWidth / 2} textAnchor={"middle"}
+                      y={innerHeight + 50}>Population
+                </text>
+                <Bars data={data} xScale={xScale} yScale={yScale} tooltipFormat={xAxisTickFormat}/>
             </g>
         </svg>
     );
