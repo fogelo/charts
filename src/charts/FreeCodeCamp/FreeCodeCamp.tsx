@@ -7,6 +7,7 @@ import Episode21 from "./Episode21";
 import Episode25 from "./Episode25";
 import Episode26 from "./Episode26";
 import DropdownEp30 from "./DropdownEp30";
+import Episode31WithMenu from "./Episode31WithMenu";
 
 const options = [
     {value: "dog", label: "Dog"},
@@ -31,11 +32,14 @@ const FreeCodeCamp = () => {
             {/*<Episode25/>*/}
             {/*<Episode26/>*/}
 
-            <label htmlFor={"pet-select"}>Choose a pet</label>
-            <DropdownEp30 options={options}
-                          id={"pet-select"}
-                          selectedValue={selectedValue}
-                          onSelectedValueChange={setSelectedValue}/>
+            {/*<label htmlFor={"pet-select"}>Choose a pet</label>*/}
+            {/*<DropdownEp30 options={options}*/}
+            {/*              id={"pet-select"}*/}
+            {/*              selectedValue={selectedValue}*/}
+            {/*              onSelectedValueChange={setSelectedValue}/>*/}
+
+            <Episode31WithMenu/>
+
         </div>
     );
 };
