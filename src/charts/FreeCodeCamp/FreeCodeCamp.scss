@@ -2,7 +2,7 @@
   border: 1px solid;
 }
 
-.episode20-svg{
+.episode20-svg {
   border: 1px solid;
 }
 
@@ -21,4 +21,16 @@
 .axis-label {
   fill: #888888;
   font-size: 2em;
+}
+
+.marks circle {
+  fill: #137b80;
+  r: 3;
+}
+
+.marks path {
+  stroke: #137b80;
+  stroke-width: 4;
+  stroke-linejoin: round;
+  stroke-linecap: round;
 }

@@ -55,18 +55,31 @@ const AxisLeft = ({yScale, innerWidth, tickOffset = -3}: any) =>
     ))
 
 
-const Bars = ({data, xScale, yScale}: any) =>
-    data.map((d: any) => {
-        return (
-            <circle className={"bar"}
-                    cx={xScale(xValue(d))}
-                    cy={yScale(yValue(d))}
-                    r={10}
-            >
-                <title>{xAxisTickFormat(d.Population)}</title>
-            </circle>
-        )
-    })
+const Marks = ({data, xScale, yScale}: any) =>
+    <g className={"marks"}>
+        {/*@ts-ignore*/}
+        <path d={d3.line()
+            .x((d: any) => xScale(xValue(d)))
+            .y(d => yScale(yValue(d)))
+            .curve(d3.curveNatural)(data)
+        }
+              fill={"none"}
+              stroke={"black"}
+        />
+        {
+            data.map((d: any) => {
+                return (
+                    <circle cx={xScale(xValue(d))}
+                            cy={yScale(yValue(d))}
+                            // r={10}
+                    >
+                        <title>{xAxisTickFormat(d.Population)}</title>
+                    </circle>
+                )
+            })
+        }
+    </g>
+
 
 const Episode26 = () => {
 
@@ -92,6 +105,7 @@ const Episode26 = () => {
     // @ts-ignore
     const yScale = d3.scaleLinear().domain(d3.extent(data, yValue))
         .range([innerHeight, 0])
+        .nice()
 
     return (
         <svg width={width} height={height}>
@@ -111,7 +125,7 @@ const Episode26 = () => {
                 >
                     {yAxisLabel}
                 </text>
-                <Bars data={data} xScale={xScale} yScale={yScale} tooltipFormat={xAxisTickFormat}/>
+                <Marks data={data} xScale={xScale} yScale={yScale} tooltipFormat={xAxisTickFormat}/>
             </g>
         </svg>
     );
