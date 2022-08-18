@@ -6,6 +6,7 @@ import {useData} from "./useData";
 import {Marks} from "./Marks";
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
+import {log} from "util";
 
 
 const width = 960
@@ -45,6 +46,8 @@ const Episode32WithMenu = () => {
     const yValue = (d: any) => d[yAttribute]
     const yAxisLabel = getLabel(yAttribute)
 
+    const colorValue = (d: any) => d.species
+
 
     if (!data) {
         return <div>Loading</div>
@@ -60,6 +63,11 @@ const Episode32WithMenu = () => {
 
     // @ts-ignore
     const yScale = d3.scaleLinear().domain(d3.extent(data, yValue)).range([0, innerHeight]).nice()
+
+    const colorScale = d3.scaleOrdinal().domain(data.map(colorValue)).range(["#e6842a", "#137b80", "#8e6c8a"])
+    console.log(colorScale.domain()) // покажет массив значений для визуализации
+    console.log(colorScale.range()) // вернет массив цветов
+
 
     return (
         <>
@@ -96,6 +104,8 @@ const Episode32WithMenu = () => {
                            yScale={yScale}
                            xValue={xValue}
                            yValue={yValue}
+                           colorScale={colorScale}
+                           colorValue={colorValue}
                            tooltipFormat={xAxisTickFormat}
                            circleRadius={7}
                     />

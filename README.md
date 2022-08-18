@@ -18,3 +18,5 @@
 - Платформа для интерактивной графики (аналог codepen) - [https://vizhub.com/](https://vizhub.com/)
 
 - Про flexbox [https://css-tricks.com/snippets/css/a-guide-to-flexbox/](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
+
+- Гайд по стилям визуализации данных - [https://github.com/amycesal/dataviz-style-guide/blob/master/Sunlight-StyleGuide-DataViz.pdf](https://github.com/amycesal/dataviz-style-guide/blob/master/Sunlight-StyleGuide-DataViz.pdf)
