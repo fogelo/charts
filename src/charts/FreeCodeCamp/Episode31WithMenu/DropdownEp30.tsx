@@ -9,8 +9,8 @@ const DropdownEp30 = ({
 
     return (
         <select id={id} onChange={event => onSelectedValueChange(event.target.value)}>
-            {options.map((option: any) => <option value={option.value}
-                                                  selected={option.value === selectedValue}>{option.label}</option>)}
+            {options.map(({value, label}: any) => <option value={value}
+                                                  selected={value === selectedValue}>{label}</option>)}
         </select>
     );
 };

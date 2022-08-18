@@ -6,8 +6,8 @@ import Episode20 from "./Episode20";
 import Episode21 from "./Episode21";
 import Episode25 from "./Episode25";
 import Episode26 from "./Episode26";
-import DropdownEp30 from "./DropdownEp30";
-import Episode31WithMenu from "./Episode31WithMenu";
+import DropdownEp30 from "./Episode31WithMenu/DropdownEp30";
+import Episode31WithMenu from "./Episode31WithMenu/Episode31WithMenu";
 
 const options = [
     {value: "dog", label: "Dog"},
@@ -18,6 +18,7 @@ const options = [
     {value: "goldfish", label: "Goldfish"},
 ]
 const initialValue = "hamster"
+
 const FreeCodeCamp = () => {
 
     const [selectedValue, setSelectedValue] = useState(initialValue)
