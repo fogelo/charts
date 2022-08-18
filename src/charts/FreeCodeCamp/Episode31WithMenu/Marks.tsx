@@ -1,8 +1,6 @@
 import React from "react";
 
 export const Marks = ({data, xScale, yScale, xValue, yValue, tooltipFormat, circleRadius}: any) => {
-
-
     return (
         data.map((d: any) => {
             return (

@@ -57,7 +57,7 @@ const Episode31WithMenu = () => {
     const xScale = d3.scaleLinear().domain(d3.extent(data, xValue)).range([0, innerWidth]).nice()
 
     // @ts-ignore
-    const yScale = d3.scaleLinear().domain(d3.extent(data, yValue)).range([0, innerHeight])
+    const yScale = d3.scaleLinear().domain(d3.extent(data, yValue)).range([0, innerHeight]).nice()
 
     return (
         <>
