@@ -6,13 +6,13 @@ import {useData} from "./useData";
 import {Marks} from "./Marks";
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
-import {log} from "util";
+import ColorLegend from "./ColorLegend";
 
 
 const width = 960
 const menuHeight = 75
 const height = 500 - menuHeight
-const margin = {top: 20, right: 30, bottom: 65, left: 90}
+const margin = {top: 20, right: 200, bottom: 65, left: 90}
 const xAxisLabelOffset = 50
 const yAxisLabelOffset = 45
 
@@ -47,7 +47,7 @@ const Episode32WithMenu = () => {
     const yAxisLabel = getLabel(yAttribute)
 
     const colorValue = (d: any) => d.species
-
+    const colorLegendLabel = "Species"
 
     if (!data) {
         return <div>Loading</div>
@@ -99,6 +99,20 @@ const Episode32WithMenu = () => {
                     >
                         {yAxisLabel}
                     </text>
+                    <g transform={`translate(${innerWidth + 60}, 60)`}>
+                        <text className={"axis-label"}
+                              textAnchor={"middle"}
+                              x={35}
+                              y={-30}
+                        >
+                            {colorLegendLabel}
+                        </text>
+                        <ColorLegend colorScale={colorScale}
+                                     tickSize={10}
+                                     tickSpacing={25}
+                                     tickTextOffset={20}
+                        />
+                    </g>
                     <Marks data={data}
                            xScale={xScale}
                            yScale={yScale}
