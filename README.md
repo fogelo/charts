@@ -16,3 +16,5 @@
 
 - примеры для настройки кривых - [https://observablehq.com/@d3/d3-line](https://observablehq.com/@d3/d3-line)
 - Платформа для интерактивной графики (аналог codepen) - [https://vizhub.com/](https://vizhub.com/)
+
+- Про flexbox [https://css-tricks.com/snippets/css/a-guide-to-flexbox/](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)

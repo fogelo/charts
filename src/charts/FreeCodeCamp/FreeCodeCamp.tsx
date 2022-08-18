@@ -8,6 +8,7 @@ import Episode25 from "./Episode25";
 import Episode26 from "./Episode26";
 import DropdownEp30 from "./Episode31WithMenu/DropdownEp30";
 import Episode31WithMenu from "./Episode31WithMenu/Episode31WithMenu";
+import Episode32WithMenu from "./Episode32WithMenu/Episode32WithMenu";
 
 const options = [
     {value: "dog", label: "Dog"},
@@ -39,7 +40,8 @@ const FreeCodeCamp = () => {
             {/*              selectedValue={selectedValue}*/}
             {/*              onSelectedValueChange={setSelectedValue}/>*/}
 
-            <Episode31WithMenu/>
+            {/*<Episode31WithMenu/>*/}
+            <Episode32WithMenu/>
 
         </div>
     );

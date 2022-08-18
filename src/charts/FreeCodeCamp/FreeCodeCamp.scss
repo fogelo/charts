@@ -18,8 +18,9 @@
   fill: #137b80;
 }
 
-.axis-label {
+.axis-label, .dropdown-label {
   fill: #888888;
+  color: #888888;
   font-size: 2em;
 }
 
@@ -33,4 +34,20 @@
   stroke-width: 4;
   stroke-linejoin: round;
   stroke-linecap: round;
+}
+
+.Dropdown-root {
+  width: 300px;
+  display: inline-block;
+}
+
+.menus-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+}
+.dropdown-label {
+  margin-left: 50px;
+  margin-right: 5px;
 }
