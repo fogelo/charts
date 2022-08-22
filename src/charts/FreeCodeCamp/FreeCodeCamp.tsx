@@ -26,7 +26,7 @@ const FreeCodeCamp = () => {
 
     const [selectedValue, setSelectedValue] = useState(initialValue)
 
-    console.log(selectedValue)
+    // console.log(selectedValue)
     return (
         <div>
             {/*<Face/>*/}
@@ -46,7 +46,7 @@ const FreeCodeCamp = () => {
             {/*<Episode32WithMenu/>*/}
             {/*<Episode35Interactive/>*/}
 
-            <Episode38MissingMigrants/>
+            {/*<Episode38MissingMigrants/>*/}
         </div>
     );
 };
