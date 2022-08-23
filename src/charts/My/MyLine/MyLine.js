@@ -15,9 +15,9 @@ const MyLine = () => {
 
 
     const xScale = d3.scaleLinear().domain(d3.extent(data, d => new Date(d.x))).range([0, innerWidth]).nice()
-    const xTick = d3.timeFormat("%X")
+    const xAxisTickFormat = d3.timeFormat("%m/%d/%Y")
 
-    const yScale = d3.scaleLinear().domain(d3.extent(data, d => d.y)).range([innerHeight, 0])
+    const yScale = d3.scaleLinear().domain(d3.extent(data, d => d.y)).range([innerHeight, 0]).nice()
 
 
     //функция, которая принимает data и вернет значение атрибута тега path
@@ -34,17 +34,33 @@ const MyLine = () => {
             <g transform={`translate(${margins.left}, ${margins.top})`}>
                 <path d={line(data)} fill={"none"} stroke={"blue"}/>
 
+                {/*ось X*/}
                 {
                     xScale.ticks().map(t => {
                         return (
-                            <g>
-                                <line x1={xScale(t)} x2={xScale(t)} y2={innerHeight}
+                            <g key={t} transform={`translate(${xScale(t)}, 0)`}>
+                                <line y2={innerHeight}
                                       stroke={"grey"}/>
-                                <text>{}</text>
+                                <text y={innerHeight + 10} dy={".71em"} textAnchor={"middle"}>{xAxisTickFormat(t)}</text>
                             </g>
                         )
                     })
                 }
+
+                {/*ось Y*/}
+
+                {
+                    yScale.ticks().map(t => {
+                        return (
+                            <g key={t} transform={`translate(0, ${yScale(t)})`}>
+                                <line x2={innerWidth}
+                                      stroke={"grey"}/>
+                                <text x={-5} dy={"3"} textAnchor={"end"}>{t}</text>
+                            </g>
+                        )
+                    })
+                }
+
             </g>
         </svg>
     );

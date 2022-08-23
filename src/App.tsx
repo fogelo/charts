@@ -8,6 +8,7 @@ import LineChart from "./my_charts/LineChart";
 import Gchart from "./my_charts/Gchart";
 import FreeCodeCamp from "./charts/FreeCodeCamp/FreeCodeCamp";
 import My from "./charts/My/My";
+import CurranKelleher from "./charts/CurranKelleher/CurranKelleher";
 
 function App() {
     return (
@@ -22,6 +23,8 @@ function App() {
             <FreeCodeCamp/>
 
             <My/>
+
+            <CurranKelleher/>
         </div>
     );
 }

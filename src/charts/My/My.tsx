@@ -6,7 +6,7 @@ import "./My.scss"
 const My = () => {
     return (
         <div>
-            <MyLine/>
+            {/*<MyLine/>*/}
         </div>
     );
 };
