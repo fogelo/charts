@@ -10,7 +10,7 @@ const CurranKelleher = () => {
             {/*<SVGFundamentals/>*/}
             {/* <SolLevitt/>*/}
             {/* <SolLevittD3/>*/}
-            <SolLevittD3RefactoringAndSymbols/>
+            {/*<SolLevittD3RefactoringAndSymbols/>*/}
         </div>
     );
 };

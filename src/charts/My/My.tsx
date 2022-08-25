@@ -8,7 +8,7 @@ import MyGradient from "./MyGradient/MyGradient";
 const My = () => {
     return (
         <div>
-            {/*<MyLine/>*/}
+            <MyLine/>
             {/*<MyMaskAndClipPath/>*/}
             {/*<MyGradient/>*/}
         </div>
