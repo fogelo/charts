@@ -10,7 +10,7 @@ const My = () => {
         <div>
             {/*<MyLine/>*/}
             {/*<MyMaskAndClipPath/>*/}
-            <MyGradient/>
+            {/*<MyGradient/>*/}
         </div>
     );
 };
