@@ -6,7 +6,7 @@ const CurranKelleher = () => {
     return (
         <div>
            {/*<SVGFundamentals/>*/}
-            <SolLevitt/>
+           {/* <SolLevitt/>*/}
         </div>
     );
 };

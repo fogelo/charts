@@ -22,7 +22,7 @@ function App() {
             {/*<Gchart/>*/}
             {/*<FreeCodeCamp/>*/}
 
-            {/*<My/>*/}
+            <My/>
 
             <CurranKelleher/>
         </div>
