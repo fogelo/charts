@@ -20,9 +20,9 @@ function App() {
             {/*<CoderLessons/>*/}
             {/*<LineChart/>*/}
             {/*<Gchart/>*/}
-            <FreeCodeCamp/>
+            {/*<FreeCodeCamp/>*/}
 
-            <My/>
+            {/*<My/>*/}
 
             <CurranKelleher/>
         </div>

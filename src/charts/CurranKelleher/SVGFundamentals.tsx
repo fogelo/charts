@@ -1,5 +1,5 @@
 import React from 'react';
-import "./SVGFundamentals.scss"
+import "./CurranKelleher.scss"
 
 const SvgFundamentals = () => {
     return (

@@ -1,10 +1,12 @@
 import React from 'react';
 import SVGFundamentals from "./SVGFundamentals";
+import SolLevitt from "./SolLevitt/SolLevitt";
 
 const CurranKelleher = () => {
     return (
         <div>
-           <SVGFundamentals/>
+           {/*<SVGFundamentals/>*/}
+            <SolLevitt/>
         </div>
     );
 };
