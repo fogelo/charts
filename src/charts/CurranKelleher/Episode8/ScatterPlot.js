@@ -35,6 +35,8 @@ const ScatterPlot = () => {
     const width = window.innerWidth
     const height = window.innerHeight
 
+    const radius = 5
+
     const main = async () => {
         const data = await csv(csvURL, parseRow)
         //Какие координаты дожна получить точка на основе данных    //domain - это диапазон данных от минимального до максимального //range - это диапазон внутри svg холста
@@ -64,7 +66,7 @@ const ScatterPlot = () => {
             .join('circle')
             .attr('cx', d => d.x)
             .attr('cy', d => d.y)
-            .attr('r', 5)
+            .attr('r', radius)
             .append('title')
             .text(d => d.title)
 
