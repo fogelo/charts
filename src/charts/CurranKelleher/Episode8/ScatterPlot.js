@@ -13,7 +13,7 @@ const ScatterPlot = () => {
         "iris.csv"                                      //file name
     ].join('')
 
-    const {csv, select, scaleLinear, extent} = d3
+    const {csv, select, scaleLinear, extent, axisLeft} = d3
 
     const parseRow = d => {
         d.sepal_length = +d.sepal_length
@@ -29,19 +29,30 @@ const ScatterPlot = () => {
 
     const xValue = d => d.petal_length
     const yValue = d => d.sepal_length
+
+    const margin = {top: 50, right: 50, bottom: 50, left: 50}
+
+    const width = window.innerWidth
+    const height = window.innerHeight
+
     const main = async () => {
         const data = await csv(csvURL, parseRow)
         //Какие координаты дожна получить точка на основе данных    //domain - это диапазон данных от минимального до максимального //range - это диапазон внутри svg холста
 
         // const x = scaleLinear().domain([d3.min(data, xValue), d3.max(data, xValue])
-        const x = scaleLinear().domain(extent(data, xValue)).range([0, width])
+        const x = scaleLinear().domain(extent(data, xValue)).range([margin.left, width - margin.right])
         console.log(x.domain())
         console.log(x.range())
 
-        const y = scaleLinear().domain(extent(data, xValue)).range([height, 0]) // от 0 до height а не наооборот так как на svg холсте координата y=0 находится вверху
+        const y = scaleLinear().domain(extent(data, yValue)).range([height - margin.bottom, margin.top]) // от 0 до height а не наооборот так как на svg холсте координата y=0 находится вверху
 
         const marks = data.map(d => ({x: x(xValue(d)), y: y(yValue(d))}))
         console.log(marks)
+
+        const svg = select('body')
+            .append('svg')
+            .attr('width', width)
+            .attr('height', height)
 
         svg.selectAll("circle")
             .data(marks)
@@ -49,17 +60,17 @@ const ScatterPlot = () => {
             .attr('cx', d => d.x)
             .attr('cy', d => d.y)
             .attr('r', 5)
+
+
+        svg.append("g").attr('transform', `translate(${margin.left},0)`).call(axisLeft(y)) // логика call - вызываем функцию, которую вернет axisLeft(y) и передава в нее элемент g
+
+        svg.append("g").attr('transform', `translate(0, ${height - margin.bottom})`).call(d3.axisBottom(x)) // логика call - вызываем функцию, которую вернет axisLeft(y) и передава в нее элемент g
+
+
     }
 
+
     main()
-    const width = window.innerWidth
-    const height = window.innerHeight
-
-    const svg = select('body')
-        .append('svg')
-        .attr('width', width)
-        .attr('height', height)
-
 
     return (
         <div>
