@@ -22,3 +22,6 @@
 - Про flexbox [https://css-tricks.com/snippets/css/a-guide-to-flexbox/](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
 
 - Гайд по стилям визуализации данных - [https://github.com/amycesal/dataviz-style-guide/blob/master/Sunlight-StyleGuide-DataViz.pdf](https://github.com/amycesal/dataviz-style-guide/blob/master/Sunlight-StyleGuide-DataViz.pdf)
+
+
+- Про то как работать с отступами при добавлении осей - [https://observablehq.com/@d3/margin-convention](https://observablehq.com/@d3/margin-convention)

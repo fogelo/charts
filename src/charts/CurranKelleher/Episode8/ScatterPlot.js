@@ -1,0 +1,71 @@
+import React from 'react';
+import * as d3 from "d3"
+import './ScatterPlot.scss'
+
+const ScatterPlot = () => {
+
+    const csvURL = [
+        "https://gist.githubusercontent.com/",
+        "fogelo/",                                      //user
+        "014461a9020371e714de7c5fcc08ec36/",            //gist id
+        "raw/",
+        "74b221547c56da43e10b933fa23860fe6b7e3d98/",    //commit
+        "iris.csv"                                      //file name
+    ].join('')
+
+    const {csv, select, scaleLinear, extent} = d3
+
+    const parseRow = d => {
+        d.sepal_length = +d.sepal_length
+        d.sepal_width = +d.sepal_width
+        d.petal_length = +d.petal_length
+        d.petal_width = +d.petal_width
+        return d
+    }
+
+    // csv(csvURL, parseRow).then(res => {
+    //     console.log(res)
+    // })
+
+    const xValue = d => d.petal_length
+    const yValue = d => d.sepal_length
+    const main = async () => {
+        const data = await csv(csvURL, parseRow)
+        //Какие координаты дожна получить точка на основе данных    //domain - это диапазон данных от минимального до максимального //range - это диапазон внутри svg холста
+
+        // const x = scaleLinear().domain([d3.min(data, xValue), d3.max(data, xValue])
+        const x = scaleLinear().domain(extent(data, xValue)).range([0, width])
+        console.log(x.domain())
+        console.log(x.range())
+
+        const y = scaleLinear().domain(extent(data, xValue)).range([height, 0]) // от 0 до height а не наооборот так как на svg холсте координата y=0 находится вверху
+
+        const marks = data.map(d => ({x: x(xValue(d)), y: y(yValue(d))}))
+        console.log(marks)
+
+        svg.selectAll("circle")
+            .data(marks)
+            .join('circle')
+            .attr('cx', d => d.x)
+            .attr('cy', d => d.y)
+            .attr('r', 5)
+    }
+
+    main()
+    const width = window.innerWidth
+    const height = window.innerHeight
+
+    const svg = select('body')
+        .append('svg')
+        .attr('width', width)
+        .attr('height', height)
+
+
+    return (
+        <div>
+
+        </div>
+    );
+};
+
+export default ScatterPlot;
