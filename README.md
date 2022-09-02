@@ -27,3 +27,5 @@
 - Про то как работать с отступами при добавлении осей - [https://observablehq.com/@d3/margin-convention](https://observablehq.com/@d3/margin-convention)
 
 - Наборы разных данных от Curran - [https://github.com/curran/data](https://github.com/curran/data)
+
+- Про то как создавать reusable компоненты (эпизод 9) - [https://bost.ocks.org/mike/chart/](https://bost.ocks.org/mike/chart/)

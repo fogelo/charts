@@ -46,7 +46,12 @@ const ScatterPlot = () => {
 
         const y = scaleLinear().domain(extent(data, yValue)).range([height - margin.bottom, margin.top]) // от 0 до height а не наооборот так как на svg холсте координата y=0 находится вверху
 
-        const marks = data.map(d => ({x: x(xValue(d)), y: y(yValue(d))}))
+        const marks = data.map(d => ({
+            x: x(xValue(d)),
+            y: y(yValue(d)),
+            title: `${x(xValue(d))}, ${yValue(d)}`
+
+        }))
         console.log(marks)
 
         const svg = select('body')
@@ -60,6 +65,8 @@ const ScatterPlot = () => {
             .attr('cx', d => d.x)
             .attr('cy', d => d.y)
             .attr('r', 5)
+            .append('title')
+            .text(d => d.title)
 
 
         svg.append("g").attr('transform', `translate(${margin.left},0)`).call(axisLeft(y)) // логика call - вызываем функцию, которую вернет axisLeft(y) и передава в нее элемент g

@@ -5,7 +5,7 @@ import SolLevittD3 from "./SolLevittD3/SolLevittD3";
 import SolLevittD3RefactoringAndSymbols from "./SolLevittD3/SolLevittD3RefactoringAndSymbols";
 import Selections from "./Episode5/Selections";
 import JSmodules from "./Episode6/JSmodules";
-import ScatterPlot from "./Episode8/ScatterPlot";
+import ScatterPlot2 from "./Episode9/ScatterPlot2";
 
 const CurranKelleher = () => {
     return (
@@ -17,7 +17,7 @@ const CurranKelleher = () => {
             {/*<Selections/>*/}
             {/*<JSmodules/>*/}
 
-            <ScatterPlot/>
+            <ScatterPlot2/>
         </div>
     );
 };
