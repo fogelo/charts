@@ -41,12 +41,12 @@ const ScatterPlot2 = () => {
         const data = await csv(csvURL, parseRow)
         svg.call(scatterPlot()
             .width(width)
-            .height(height))
+            .height(height)
             .data(data)
             .xValue(d => d.petal_length)
             .yValue(d => d.sepal_length)
             .margin({top: 50, right: 50, bottom: 50, left: 50})
-            .radius(5)
+            .radius(5))
     }
     main()
 

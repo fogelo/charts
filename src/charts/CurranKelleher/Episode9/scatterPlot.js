@@ -11,6 +11,8 @@ export const scatterPlot = () => {
     let radius
 
     const my = (selection) => {
+        console.log(data)
+
         const x = scaleLinear().domain(extent(data, xValue)).range([margin.left, width - margin.right])
         const y = scaleLinear().domain(extent(data, yValue)).range([height - margin.bottom, margin.top])
 
@@ -18,7 +20,6 @@ export const scatterPlot = () => {
             x: x(xValue(d)),
             y: y(yValue(d)),
             title: `${x(xValue(d))}, ${yValue(d)}`
-
         }))
 
         selection.selectAll("circle")

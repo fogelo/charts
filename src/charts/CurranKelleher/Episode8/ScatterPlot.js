@@ -13,7 +13,7 @@ const ScatterPlot = () => {
         "iris.csv"                                      //file name
     ].join('')
 
-    const {csv, select, scaleLinear, extent, axisLeft} = d3
+    const {csv, select, scaleLinear, extent, axisLeft, axisBottom} = d3
 
     const parseRow = d => {
         d.sepal_length = +d.sepal_length
@@ -54,7 +54,6 @@ const ScatterPlot = () => {
             title: `${x(xValue(d))}, ${yValue(d)}`
 
         }))
-        console.log(marks)
 
         const svg = select('body')
             .append('svg')
@@ -73,7 +72,7 @@ const ScatterPlot = () => {
 
         svg.append("g").attr('transform', `translate(${margin.left},0)`).call(axisLeft(y)) // логика call - вызываем функцию, которую вернет axisLeft(y) и передава в нее элемент g
 
-        svg.append("g").attr('transform', `translate(0, ${height - margin.bottom})`).call(d3.axisBottom(x)) // логика call - вызываем функцию, которую вернет axisLeft(y) и передава в нее элемент g
+        svg.append("g").attr('transform', `translate(0, ${height - margin.bottom})`).call(axisBottom(x)) // логика call - вызываем функцию, которую вернет axisLeft(y) и передава в нее элемент g
 
 
     }
