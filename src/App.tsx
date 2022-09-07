@@ -22,9 +22,9 @@ function App() {
             {/*<Gchart/>*/}
             {/*<FreeCodeCamp/>*/}
 
-            {/*<My/>*/}
+            <My/>
 
-            <CurranKelleher/>
+            {/*<CurranKelleher/>*/}
         </div>
     );
 }
