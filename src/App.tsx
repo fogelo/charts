@@ -9,6 +9,7 @@ import Gchart from "./my_charts/Gchart";
 import FreeCodeCamp from "./charts/FreeCodeCamp/FreeCodeCamp";
 import My from "./charts/My/My";
 import CurranKelleher from "./charts/CurranKelleher/CurranKelleher";
+import Observablehq from "./charts/Observablehq/Observablehq";
 
 function App() {
     return (
@@ -22,9 +23,11 @@ function App() {
             {/*<Gchart/>*/}
             {/*<FreeCodeCamp/>*/}
 
-            <My/>
+            {/*<My/>*/}
 
             {/*<CurranKelleher/>*/}
+
+            <Observablehq/>
         </div>
     );
 }
